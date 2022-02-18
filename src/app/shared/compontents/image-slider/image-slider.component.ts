@@ -20,6 +20,7 @@ export class ImageSliderComponent implements OnInit, OnChanges {
   @Input() height: string = '';
   @Input() width: string = '';
   @Input() imagesList: string[] = [];
+  @Input() navs: boolean = true;
 
 
   constructor() { }

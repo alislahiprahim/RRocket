@@ -9,6 +9,6 @@
     </div>
 </ng-template>
 
-<div class="d-flex align-items-center justify-content-center my-1" [style]=" 'width: '+ width">
-    <i class="fa fa-chevron-circle-right m-1" (click)="nextImg()"></i><i class="fa fa-chevron-circle-left m-1" (click)="prevImg()"></i>
+<div *ngIf="navs" class="d-flex align-items-center justify-content-center my-1" [style]=" 'margin-right:7px ;width: '+ width">
+    <i class="fa fa-arrow-right m-1 fa-sm" (click)="nextImg()"></i><i class="fa fa-arrow-left fa-sm m-1" (click)="prevImg()"></i>
 </div>
