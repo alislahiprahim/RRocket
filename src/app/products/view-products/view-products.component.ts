@@ -16,14 +16,14 @@ import { ProductService } from '../product.service';
 })
 export class ViewProductsComponent implements OnInit {
 
-  productView: number = 1 | 2;
-  displayedColumns: string[] = ['images', 'nameAr', 'nameEn', 'originalPrice', 'discountPrice', 'clothGender', 'clothSize','actions'];
+  productView: number = 2;
+  displayedColumns: string[] = ['images', 'nameAr', 'nameEn', 'originalPrice', 'discountPrice', 'clothGender', 'clothSize', 'actions'];
 
   filteredCategoryValue = new FormControl(null);
   readonly env = environment;
   filtringSubscription = new Subscription;
 
-  constructor(private dialog: MatDialog, private messageService:MessagesService, public productService: ProductService, public categoryService: CategoryService) { }
+  constructor(private dialog: MatDialog, private messageService: MessagesService, public productService: ProductService, public categoryService: CategoryService) { }
 
   ngOnInit(): void {
 
@@ -58,19 +58,19 @@ export class ViewProductsComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-       if (result.message === 'DELETE') {
+      if (result.message === 'DELETE') {
         this.productService.deleteProduct(result.id).subscribe({
           next: (resp: ProductResponse) => {
-             if (resp.message == '' || resp.isSuccess == true) {
+            if (resp.message == '' || resp.isSuccess == true) {
               this.messageService.deleteSuccessToast('تم الحذف بنجاح');
-             } else {
+            } else {
               this.messageService.deleteFailureToast(resp.message);
             }
           },
           error: (err: any) => {
             this.messageService.deleteFailureToast(err.error.errors[0]);
-           }
-         })
+          }
+        })
       }
     })
   }
