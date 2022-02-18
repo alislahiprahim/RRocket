@@ -1,0 +1,18 @@
+<div class="col-12 my-1 d-flex justify-content-start">
+    <div class="file-upload mt-1 mat-elevation-z1">
+        <input type="file" #file (change)="uploadImage(file.files)" [multiple]='multiple' maxlength="3" [accept]="['.png','.jpg']" />
+        <i class="fas fa-images"></i>
+
+    </div>
+
+    <div class="outClients" *ngFor="let slide of imageList;let i=index">
+        <img load=lazy class="" src="{{slide}}" style="width: 50px; height:50px;">
+        <i class="fa fa-times-circle text-danger" (click)="removeImage(slide)"></i>
+    </div>
+
+    <div class="file-upload mt-1" *ngIf="imageList.length != 0" (click)="confirmImages()">
+        <i class="fa fa-check"></i>
+    </div>
+
+</div>
+<mat-hint *ngIf="multiple"> *ما لا يزيد عن 3 صور</mat-hint>

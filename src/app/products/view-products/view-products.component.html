@@ -1,0 +1,131 @@
+<div class="container-fluid bg-light mat-elevation-z1 border-radius p-2 px-3">
+
+    <div class="  d-flex align-items-center justify-content-between  ">
+        <h3>المنتجات</h3>
+        <i class="fas fa-redo" style="color: var(--accent);" (click)="getAllTeams()"></i>
+    </div>
+    <div class="row">
+
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <mat-form-field class="w-auto" appearance='outline'>
+                <mat-label> الماركة التجارية </mat-label>
+                <mat-select [formControl]="filteredCategoryValue">
+                    <mat-option [value]="0">الكل</mat-option>
+                    <mat-option [value]="cat.id" *ngFor="let cat of  categoryService.categoryList$ | async">
+                        {{cat.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="d-flex align-items-center justify-content-center">
+
+                <button mat-button (click)="productView = 1" [ngStyle]="{'background-color': productView == 1 ? 'var(--primary)' :'#fff'}"><i class="fa fa-th"></i></button>
+                <button mat-button (click)="productView = 2" [ngStyle]="{'background-color': productView == 2 ? 'var(--primary)' :'#fff'}"><i class="fa fa-th-list"></i></button>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <hr>
+    </div>
+
+    <ng-container *ngIf="productView === 1; else elseTemplate1">
+        <div class="row my-3 d-flex flex-wrap align-items-center justify-content-center">
+            <ng-container *ngIf="productService.productList$.value.length; else elseTemplate;">
+                <mat-card class="my-card" *ngFor="let product of productService.filteredProductList$ | async">
+                    <!-- <mat-card-title>رقم : {{product.id}}</mat-card-title> -->
+                    <mat-card-subtitle>
+                        <h4> {{product.nameAr}} &nbsp; </h4>
+                    </mat-card-subtitle>
+                    <image-slider [height]="'250px'" [imagesList]="product.images"></image-slider>
+
+                    <mat-card-content>
+                        <span>
+                        {{product.description | slice:0:100}}
+                    </span>
+                        <br>
+                        <span>السعر: {{product.originalPrice | currency}}</span>
+                        <br>
+                        <span>الخصم : {{product.discountPrice }} %</span>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-flat-button color="accent">تعديل</button>
+                        <button mat-stroked-button color="warn" (click)="deleteProduct(product)">حذف</button>
+                    </mat-card-actions>
+                </mat-card>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <p>لا توجد بيانات مضافة</p>
+            </ng-template>
+
+        </div>
+    </ng-container>
+    <ng-template #elseTemplate1>
+        <div class="row">
+            <table mat-table [dataSource]="productService.productList$.value" class=" mat-elevation-z8 ">
+
+                <!--  Column -->
+                <ng-container matColumnDef="images">
+                    <th mat-header-cell *matHeaderCellDef> الصور </th>
+                    <td mat-cell *matCellDef="let element ">
+                        <image-slider [width]="'50px !important'" [height]=" '50px !important' " [imagesList]="element.images "></image-slider>
+                    </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="nameAr">
+                    <th mat-header-cell *matHeaderCellDef> الاسم بالعربية </th>
+                    <td mat-cell *matCellDef="let element "> {{element.nameAr}} </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="nameEn">
+                    <th mat-header-cell *matHeaderCellDef> الاسم بالانجليزية </th>
+                    <td mat-cell *matCellDef="let element "> {{element.nameEn}} </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="originalPrice">
+                    <th mat-header-cell *matHeaderCellDef> السعر الاساسى </th>
+                    <td mat-cell *matCellDef="let element "> {{element.originalPrice}} </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="discountPrice">
+                    <th mat-header-cell *matHeaderCellDef> خصم المنتج </th>
+                    <td mat-cell *matCellDef="let element "> {{element.discountPrice}} </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="clothGender">
+                    <th mat-header-cell *matHeaderCellDef> النوع </th>
+                    <td mat-cell *matCellDef="let element "> {{element.clothGender}} </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="clothSize">
+                    <th mat-header-cell *matHeaderCellDef> المقاس </th>
+                    <td mat-cell *matCellDef="let element "> {{element.clothSize}} </td>
+                </ng-container>
+
+                <!--  Column -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> اجراءات </th>
+                    <td mat-cell *matCellDef="let element ">
+                        <i class="fa fa-trash-alt fa-xs text-light" style="background-color:var(--primary); padding: 7px; border-radius: 50%;" (click)="deleteProduct(element)"></i>
+                        <i class="fa fa-pen fa-xs text-light mx-1" style="background-color:var(--accent); padding: 7px; border-radius: 50%;"></i>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+            </table>
+        </div>
+    </ng-template>
+
+
+
+</div>

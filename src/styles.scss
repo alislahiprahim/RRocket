@@ -1,0 +1,58 @@
+@import "~@angular/material/theming";
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@100&family=Roboto:wght@300&display=swap');
+@include mat-core();
+$my-theme-primary: mat-palette($mat-red,
+900);
+$my-theme-accent: mat-palette($mat-gray,
+900);
+$my-theme-warn: mat-palette($mat-red);
+$my-theme: mat-light-theme($my-theme-primary,
+$my-theme-accent,
+$my-theme-warn);
+@include angular-material-theme($my-theme);
+:root {
+    --primary: #B71C1C;
+    --accent: #212121;
+    --warn: #dd2c00;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.border-radius {
+    border-radius: 12px;
+}
+
+.fa-eye,
+.fa-eye-slash,
+.fa-redo,
+.fa-times {
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.fa-redo:hover {
+    transform: rotateZ(360deg) !important;
+}
+
+.my-card {
+    width: 21rem !important;
+    margin: 5px;
+    img {
+        height: 50px !important;
+        width: 50px !important;
+        border-radius: 100%;
+    }
+    p {
+        height: 5rem !important;
+        overflow: hidden;
+    }
+    h3 {
+        height: 20px !important;
+        overflow: hidden;
+    }
+}

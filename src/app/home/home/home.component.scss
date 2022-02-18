@@ -1,0 +1,19 @@
+.home-card {
+    padding: 7px 15px;
+    h4 {
+        color: rgb(114, 114, 114);
+        font-weight: 500;
+        font-size: large;
+    }
+    p {
+        font-weight: 500;
+    }
+}
+
+.home-icon {
+    border-radius: 8px;
+    background-color: rgba(165, 1, 1, 0.37);
+    color: var(--primary);
+    width: 30px;
+    height: 30px;
+}

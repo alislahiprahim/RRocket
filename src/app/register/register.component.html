@@ -1,0 +1,129 @@
+<div dir="rtl" class="container-fluid d-flex align-items-center justify-content-center" style="min-height: 100vh;background-color: rgb(238, 238, 238);">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <app-logo [color]="'#000'"></app-logo>
+            </div>
+        </div>
+        <div class="row my-4">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="mat-elevation-z1 border-radius " style="width: 50rem;  overflow: hidden;">
+                    <mat-horizontal-stepper linear #stepper>
+                        <mat-step [stepControl]="userCodeForm" [editable]="true">
+                            <form [formGroup]="userCodeForm">
+                                <ng-template matStepLabel> كود المستخدم </ng-template>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>كود المستخدم</mat-label>
+                                    <input matInput formControlName="userCode" placeholder="code 123">
+                                </mat-form-field>
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <button class="mx-1" mat-raised-button type="button" color="accent" [disabled]="!userCodeForm.valid" (click)="checkParentCodeExists()">تحقق من الكود</button>
+                                    <button mat-raised-button color="primary" matStepperNext [disabled]=" false">التالى</button>
+                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step [stepControl]="teamCodeForm" [editable]="true">
+                            <form [formGroup]="teamCodeForm">
+                                <ng-template matStepLabel>كود التيم</ng-template>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>كود التيم</mat-label>
+                                    <mat-select formControlName="teamCode">
+                                        <mat-option [value]="team.id" *ngFor="let team of this.teamService.teamsList$ | async">{{team.name}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>الكود الشخصى</mat-label>
+                                    <input matInput formControlName="userCode" placeholder="code 123">
+                                </mat-form-field>
+                                <div>
+                                    <button mat-button matStepperPrevious>السابق</button>
+                                    <button mat-raised-button type="button" color="accent" matStepperNext [disabled]="!teamCodeForm.valid">تحقق من
+                                        الكود</button>
+                                    <button mat-raised-button color="primary" matStepperNext [disabled]="!teamCodeForm.valid">التالى</button>
+                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step [stepControl]="personalForm" [editable]="true">
+                            <form [formGroup]="personalForm">
+                                <ng-template matStepLabel>البيانات الشخصية</ng-template>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>الاسم</mat-label>
+                                    <input matInput formControlName="name" placeholder="احمد كامل">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>البريد الالكترونى</mat-label>
+                                    <input matInput formControlName="email" placeholder="user@example.com">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>رقم الهاتف</mat-label>
+                                    <input type="text" matInput formControlName="phoneNumber" placeholder="01011111111" maxlength="11">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>الرقم القومى</mat-label>
+                                    <input matInput formControlName="nationalId" placeholder="21236987452123" maxlength="14">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>اسم الوارث</mat-label>
+                                    <input matInput formControlName="inheritorName">
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>صلة القرابة</mat-label>
+                                    <mat-select formControlName="relativeRelation">
+                                        <mat-option [value]="rr.id" *ngFor="let rr of [{id:0,name:'اخ'}]">{{rr.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div class="w-100">
+                                    <mat-label>النوع</mat-label>
+                                    <mat-radio-group formControlName="gender" class="example-radio-group">
+
+                                        <mat-radio-button class="example-radio-button" [value]="0">
+                                            ذكر
+                                        </mat-radio-button>
+                                        <mat-radio-button class="example-radio-button" [value]="1">
+                                            انثى
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div>
+                                    <button mat-button matStepperPrevious>السابق</button>
+                                    <button mat-raised-button color="primary" matStepperNext [disabled]="!personalForm.valid">التالى</button>
+                                </div>
+                            </form>
+                        </mat-step>
+                        <mat-step [stepControl]="accountInfoForm" [editable]="false">
+                            <form [formGroup]="accountInfoForm" (ngSubmit)="submit()">
+                                <ng-template matStepLabel>بيانات الحساب</ng-template>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>كلمة المرور</mat-label>
+                                    <input matInput formControlName="password" placeholder="**********">
+
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label> تأكيد كلمة المرور</mat-label>
+                                    <input matInput formControlName="confirmedPassword" placeholder="**********">
+                                    <mat-error *ngIf="accountInfoForm.controls['confirmedPassword'].hasError('match')">
+                                        *تأكيد كلمة المرور غير متطابقة مع كلمة المرور
+                                    </mat-error>
+                                </mat-form-field>
+
+                                <div>
+                                    <button mat-button matStepperPrevious>السابق</button>
+                                    <ng-container *ngIf="!sent; else elseTemplate">
+                                        <button mat-raised-button type="submit" color="primary" matStepperNext [disabled]="!accountInfoForm.valid">حفظ</button>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <mat-spinner diameter="25" color='light' strokeWidth='2'></mat-spinner>
+                                    </ng-template>
+                                </div>
+                            </form>
+                        </mat-step>
+
+
+                    </mat-horizontal-stepper>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

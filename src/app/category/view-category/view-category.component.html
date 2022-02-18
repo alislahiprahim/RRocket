@@ -1,0 +1,50 @@
+<div class="container-fluid bg-light mat-elevation-z1 border-radius p-2 px-3">
+
+    <div class="  d-flex align-items-center justify-content-between  ">
+        <h3>الماركات التجارية</h3>
+        <i class="fas fa-redo" style="color: var(--accent);" (click)="getAllTeams()"></i>
+    </div>
+    <div class="row">
+
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-start align-items-center">
+            <mat-form-field class="w-auto" appearance='outline'>
+                <mat-label> الماركة التجارية </mat-label>
+                <mat-select [formControl]="filteredBrandValue">
+                    <mat-option [value]="0">الكل</mat-option>
+                    <mat-option [value]="brand.id" *ngFor="let brand of  brandService.brandList$ | async">
+                        {{brand.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+
+        <hr>
+    </div>
+    <div class="row my-3 d-flex flex-wrap align-items-center justify-content-center">
+        <ng-container *ngIf="categoryService.filteredCategoryList$.value.length; else elseTemplate;">
+            <mat-card class="my-card" *ngFor="let cat of categoryService.filteredCategoryList$ | async">
+                <img class="my-2" src="{{env.imgBaseUrl}}{{cat.imagePath}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
+                <mat-card-title>رقم : {{cat.id}}</mat-card-title>
+                <mat-card-subtitle>
+                    <h4> {{cat.name}} &nbsp; </h4>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    كود المنتج : {{cat.productCode}}
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-flat-button color="accent">تعديل</button>
+                    <button mat-stroked-button color="warn">حذف</button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <p>لا توجد بيانات مضافة</p>
+        </ng-template>
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+    padding: 7px 2px;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.2em) scale(.80);
+    width: 133.33333%;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: -2px !important;
+}
+
+::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+}
+
+::ng-deep.mat-error {
+    margin-top: 10px;
+}

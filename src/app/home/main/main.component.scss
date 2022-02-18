@@ -1,0 +1,63 @@
+::ng-deep.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+::ng-deep.mat-expansion-indicator::after {
+    color: #fff !important;
+}
+
+.sideNav {
+    width: 250px;
+    background-color: var(--accent);
+    color: #fff;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.navs {
+    transition: all .3s ease-in-out;
+}
+
+.navs ul {
+    list-style: none;
+    font-weight: 800;
+}
+
+.navs a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: medium !important;
+    font-weight: 600 !important;
+}
+
+.navs i {
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: small !important;
+}
+
+.active a {
+    color: #fff
+}
+
+.active i {
+    color: #fff
+}
+
+.active {
+    transition: all .3s ease-in-out;
+    color: #fff;
+    background-color: var(--primary);
+    margin: 10px 0px;
+    border-radius: 3px;
+}
+
+.progressbar {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+}

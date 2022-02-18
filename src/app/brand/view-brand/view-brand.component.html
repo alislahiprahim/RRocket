@@ -1,0 +1,33 @@
+<div class="container-fluid bg-light mat-elevation-z1 border-radius p-2 px-3">
+
+    <div class="  d-flex align-items-center justify-content-between  ">
+        <h3>الماركات التجارية</h3>
+        <i class="fas fa-redo" style="color: var(--accent);" (click)="getAllTeams()"></i>
+    </div>
+    <div class="row">
+
+        <hr>
+    </div>
+    <div class="row my-3 d-flex flex-wrap align-items-center justify-content-center">
+        <ng-container *ngIf="brandService.brandList$.value.length; else elseTemplate;">
+            <mat-card class="my-card" *ngFor="let brand of brandService.brandList$ | async">
+                <img class="my-2" src="{{env.imgBaseUrl}}{{brand.imagePath}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
+                <mat-card-title>رقم : {{brand.id}}</mat-card-title>
+                <mat-card-subtitle>
+                    <h4> {{brand.name}} &nbsp; </h4>
+                </mat-card-subtitle>
+                <mat-card-content>
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-flat-button color="accent">تعديل</button>
+                    <button mat-stroked-button color="warn">حذف</button>
+                </mat-card-actions>
+            </mat-card>
+        </ng-container>
+        <ng-template #elseTemplate>
+            <p>لا توجد بيانات مضافة</p>
+        </ng-template>
+
+    </div>
+</div>

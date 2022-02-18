@@ -1,0 +1,14 @@
+<div class="d-flex align-items-center justify-content-between ">
+    <i class="fa fa-times" (click)="cancel()"></i>
+    <h5><b>تأكيد</b></h5>
+
+</div>
+<div class=" my-4">
+    <p>هل انت متأكد من اجراء الحذف ؟ </p>
+    <p class="text-center">{{data.name}}</p>
+</div>
+
+<div class="d-flex justify-content-end align-item-center">
+    <button mat-button color="warn" (click)="confirm()">نعم</button>
+    <button class="mx-3" mat-button (click)="cancel()">لا</button>
+</div>
