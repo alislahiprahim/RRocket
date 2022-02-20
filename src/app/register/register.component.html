@@ -17,9 +17,15 @@
                                     <mat-label>كود المستخدم</mat-label>
                                     <input matInput formControlName="userCode" placeholder="code 123">
                                 </mat-form-field>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <button class="mx-1" mat-raised-button type="button" color="accent" [disabled]="!userCodeForm.valid" (click)="checkParentCodeExists()">تحقق من الكود</button>
-                                    <button mat-raised-button color="primary" matStepperNext [disabled]=" false">التالى</button>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div>
+                                        <button mat-raised-button color="primary" matStepperNext [disabled]="!userCodeForm.valid">التالى</button>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+
+                                        <div><span> لديك حساب ؟ &nbsp;</span><a style="color: var(--primary);" [routerLink]="['/login']">سجل الان</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </mat-step>
