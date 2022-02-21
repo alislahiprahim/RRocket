@@ -44,7 +44,7 @@ export class ViewTeamsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result === 'DONE') {
-        // this.getAllAboutInfo()
+        this.getAllTeams()
       }
     })
   }

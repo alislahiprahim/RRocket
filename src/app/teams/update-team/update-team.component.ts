@@ -3,14 +3,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessagesService } from 'src/app/services/messages.service';
-import { resetform } from 'src/app/shared/validators/forms';
 import { Teams, TeamsResponse } from '../models/teams.model';
 import { TeamsService } from '../teams.service';
 
 @Component({
-  selector: 'app-update-team',
   templateUrl: './update-team.component.html',
-  styleUrls: ['./update-team.component.scss']
 })
 export class UpdateTeamComponent implements OnInit {
   sent: boolean = false;
@@ -59,9 +56,10 @@ export class UpdateTeamComponent implements OnInit {
         this.sent = false;
         if (resp.message == '' || resp.isSuccess == true) {
           this.messageService.successToast('تم تعديل الفريق بنجاح');
-          this.dialogRef.close(this.teamsForm.value)
+          this.dialogRef.close('DONE')
         } else {
           this.messageService.errorToast(resp.message);
+          this.dialogRef.close('DONE')
         }
       },
       error: (err: any) => {
