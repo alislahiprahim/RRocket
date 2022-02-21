@@ -62,13 +62,13 @@ export class ViewTeamsComponent implements OnInit {
         this.teamsService.deleteTeam(result.id).subscribe({
           next: (resp: TeamsResponse) => {
             if (resp.message == '' || resp.isSuccess == true) {
-              this.messageService.deleteSuccessToast('تم الحذف بنجاح');
+              this.messageService.topRightSuccessToast('تم الحذف بنجاح');
             } else {
-              this.messageService.deleteFailureToast(resp.message);
+              this.messageService.topRightFailureToast(resp.message);
             }
           },
           error: (err: any) => {
-            this.messageService.deleteFailureToast(err.error.errors[0]);
+            this.messageService.topRightFailureToast(err.error.errors[0]);
           }
         })
       }

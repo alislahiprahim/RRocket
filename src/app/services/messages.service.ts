@@ -51,7 +51,7 @@ export class MessagesService {
         })
     }
 
-    deleteSuccessToast(text:string) {
+    topRightSuccessToast(text:string) {
 
         Toast.fire({
             icon: 'success',
@@ -59,7 +59,7 @@ export class MessagesService {
         })
     }
 
-    deleteFailureToast(text: string) {
+    topRightFailureToast(text: string) {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

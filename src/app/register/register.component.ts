@@ -47,14 +47,6 @@ export class RegisterComponent implements OnInit {
     this.userCodeForm = this.fb.group({
       userCode: [null, Validators.required],
     })
-    this.userCodeForm.valueChanges.pipe(
-      tap(() => { }),
-      debounceTime(800),
-      distinctUntilChanged(),
-      switchMap(() => this.checkParentCodeExists()),
-      map(userId => { console.log(userId) })
-    ).subscribe()
-
   }
 
   TeamCodeForm() {
@@ -118,30 +110,36 @@ export class RegisterComponent implements OnInit {
       this.registerService.checkParentCode(this.userCodeForm.controls['userCode'].value).subscribe({
         next: (resp: ResponseBody) => {
           if (resp.isSuccess) {
-            this.messageService.successToast('كود مستخدم صحيح');
+            this.messageService.topRightSuccessToast('كود مستخدم صحيح');
             this.personalForm.controls['parentId'].patchValue(resp.data.userId);
           } else {
-            this.messageService.errorToast(resp.message)
+            this.messageService.topRightFailureToast(resp.message)
           }
         },
         error: (err: any) => {
 
-          this.messageService.errorToast(err.error.message)
+          this.messageService.topRightFailureToast(err.error.message)
         },
         complete: () => { }
       })
     } else { }
 
-    return ''
-  }
+   }
 
   checkUserCodeExists() {
     this.registerService.checkUserCode(this.teamCodeForm.controls['teamCode'].value, this.teamCodeForm.controls['userCode'].value).subscribe({
       next: (resp: ResponseBody) => {
         if (resp.isSuccess) {
-
+          this.messageService.topRightSuccessToast('تم قبول كود المستخدم');
+         } else {
+          this.messageService.topRightFailureToast(resp.message)
         }
-      }
+      },
+      error: (err: any) => {
+
+        this.messageService.topRightFailureToast(err.error.message)
+      },
+      complete: () => { }
     })
   }
 

@@ -43,14 +43,14 @@ export class ViewAboutComponent implements OnInit {
         this.aboutInfoService.aboutInfoActivation(result.id).subscribe({
           next: (resp: AboutInfoResponse) => {
             if (resp.message == '' || resp.isSuccess == true) {
-              !item.isActive ? this.messageService.deleteSuccessToast('تم الفعيل بنجاح') : this.messageService.deleteSuccessToast('تم الغاء الفعيل بنجاح');
+              !item.isActive ? this.messageService.topRightSuccessToast('تم الفعيل بنجاح') : this.messageService.topRightSuccessToast('تم الغاء الفعيل بنجاح');
 
             } else {
-              this.messageService.deleteFailureToast(resp.message);
+              this.messageService.topRightFailureToast(resp.message);
             }
           },
           error: (err: any) => {
-            this.messageService.deleteFailureToast(err.error.errors[0]);
+            this.messageService.topRightFailureToast(err.error.errors[0]);
           }
         })
       }
