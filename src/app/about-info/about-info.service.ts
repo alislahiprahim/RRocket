@@ -29,4 +29,8 @@ export class AboutInfoService {
   aboutInfoActivation(id: number): Observable<any> {
     return this.http.put(env.baseUrl + `AboutInfos/Activation/${id}`, null).pipe(catchError(err => { return err }));
   }
+
+  editAboutInfo( data: AboutInfo): Observable<any> {
+    return this.http.put(env.baseUrl + `AboutInfos`, data).pipe(catchError(err => { return err }));
+  }
 }

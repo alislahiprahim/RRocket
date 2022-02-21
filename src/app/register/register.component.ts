@@ -1,6 +1,9 @@
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { StepperOrientation } from '@angular/cdk/stepper';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, map, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs';
 import { MessagesService } from '../services/messages.service';
 import { TeamsService } from '../teams/teams.service';
 import { ResponseBody } from './models/register.model';
@@ -18,8 +21,14 @@ export class RegisterComponent implements OnInit {
   personalForm!: FormGroup;
   accountInfoForm!: FormGroup;
   isEditable = false;
+  stepperOrientation!: Observable<StepperOrientation>;
 
-  constructor(private fb: FormBuilder, private router: Router, private registerService: RegisterService, private messageService: MessagesService, public teamService: TeamsService) { }
+  constructor(private fb: FormBuilder, breakpointObserver: BreakpointObserver, private router: Router, private registerService: RegisterService, private messageService: MessagesService, public teamService: TeamsService) {
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+
+  }
 
   ngOnInit() {
     this.getTeams()
@@ -38,8 +47,13 @@ export class RegisterComponent implements OnInit {
     this.userCodeForm = this.fb.group({
       userCode: [null, Validators.required],
     })
-
-    
+    this.userCodeForm.valueChanges.pipe(
+      tap(() => { }),
+      debounceTime(800),
+      distinctUntilChanged(),
+      switchMap(() => this.checkParentCodeExists()),
+      map(userId => { console.log(userId) })
+    ).subscribe()
 
   }
 
@@ -58,7 +72,8 @@ export class RegisterComponent implements OnInit {
       nationalId: [null, [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       gender: [null, Validators.required],
       relativeRelation: [null, Validators.required],
-      inheritorName: [null, Validators.required]
+      inheritorName: [null, Validators.required],
+      parentId: [null]
     })
   }
 
@@ -99,21 +114,25 @@ export class RegisterComponent implements OnInit {
   }
 
   checkParentCodeExists() {
+    if (this.userCodeForm.controls['userCode'].value?.trim()) {
+      this.registerService.checkParentCode(this.userCodeForm.controls['userCode'].value).subscribe({
+        next: (resp: ResponseBody) => {
+          if (resp.isSuccess) {
+            this.messageService.successToast('كود مستخدم صحيح');
+            this.personalForm.controls['parentId'].patchValue(resp.data.userId);
+          } else {
+            this.messageService.errorToast(resp.message)
+          }
+        },
+        error: (err: any) => {
 
-    this.registerService.checkParentCode(this.userCodeForm.controls['userCode'].value).subscribe({
-      next: (resp: ResponseBody) => {
-        if (resp.isSuccess) {
-          this.userCodeForm.controls['userCode'].setValue(resp.data);
-          this.messageService.successToast(resp.message)
-        } else {
-          this.messageService.errorToast(resp.message)
-        }
-      },
-      error: (err: any) => {
-        this.messageService.errorToast(err)
-      },
-      complete: () => { }
-    })
+          this.messageService.errorToast(err.error.message)
+        },
+        complete: () => { }
+      })
+    } else { }
+
+    return ''
   }
 
   checkUserCodeExists() {

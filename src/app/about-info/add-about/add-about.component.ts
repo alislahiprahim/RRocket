@@ -34,8 +34,7 @@ export class AddAboutComponent implements OnInit {
       address: [null, Validators.required],
       mobileNumber: [null, [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(11), Validators.minLength(8)]],
       secondMobileNumber: [null, [Validators.pattern('[0-9]*'), Validators.maxLength(11), Validators.minLength(8)]],
-      logoUrl: [null, Validators.required],
-
+ 
     })
   }
 
