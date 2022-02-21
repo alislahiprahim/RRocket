@@ -1,5 +1,5 @@
 import { MessagesService } from 'src/app/services/messages.service';
-import { UpdateTeamComponent } from './../update-team/update-team.component';
+import { UpdateTeamComponent } from '../update-team/update-team.component';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Teams, TeamsResponse } from '../models/teams.model';
