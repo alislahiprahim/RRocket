@@ -35,7 +35,8 @@ export class EditAboutComponent implements OnInit {
       address: [this.data.address, Validators.required],
       mobileNumber: [this.data.mobileNumber, [Validators.required, Validators.pattern('[0-9]*'), Validators.maxLength(11), Validators.minLength(8)]],
       secondMobileNumber: [this.data.secondMobileNumber, [Validators.pattern('[0-9]*'), Validators.maxLength(11), Validators.minLength(8)]],
- 
+      logoUrl: [this.data.logoUrl, Validators.required],
+
     })
 
   }
