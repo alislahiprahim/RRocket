@@ -26,4 +26,12 @@ export class TeamsService {
             }
         })
     }
+
+  updateTeams(data: any): Observable<any> {
+    return this.http.put(env.baseUrl + `Teams`, data).pipe(catchError(err => { return throwError(err) }))
+  }
+
+  deleteTeam(id: number): Observable<any> {
+    return this.http.delete(env.baseUrl + `Teams/${id}`).pipe(catchError(err => { return throwError(err) }))
+  }
 }
