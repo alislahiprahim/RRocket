@@ -7,13 +7,15 @@ import { ViewTeamsComponent } from './view-teams/view-teams.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddTeamsComponent } from './add-teams/add-teams.component';
 import { TeamsService } from './teams.service';
+import { UpdateTeamComponent } from './update-team/update-team.component';
 
 
 @NgModule({
   declarations: [
     TeamsComponent,
     ViewTeamsComponent,
-    AddTeamsComponent
+    AddTeamsComponent,
+    UpdateTeamComponent
   ],
   imports: [
     SharedModule,
