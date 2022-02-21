@@ -1,1 +1,136 @@
-<p>edit-about works!</p>
+<div class="container-fluid border-radius py-2">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <h3 mat-dialog-title>تعديل عن الشركة</h3>
+        <i class="fa fa-times" (click)="dialogRef.close()"></i>
+    </div>
+
+    <div class="row my-3">
+
+        <form [formGroup]="aboutInfoForm" (ngSubmit)="submit()">
+            <mat-dialog-content class="mat-typography">
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> اسم الشركة </mat-label>
+                        <input type="text" matInput formControlName="name" placeholder=" اسم الشركة  " maxlength="25">
+                        <mat-error *ngIf="aI['name'].hasError('required')  ">* برجاء ادخال اسم الشركة
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> العنوان</mat-label>
+                        <input type="text" matInput formControlName="address" placeholder=" العنوان">
+                        <mat-error *ngIf="aI['address'].hasError('required') ">* برجاء ادخال العنوان
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> رقم الهاتف 1</mat-label>
+                        <input type="text" matInput formControlName="mobileNumber" placeholder=" 01000011100" maxlength="11">
+                        <mat-error *ngIf="aI['mobileNumber'].errors">* برجاء ادخال رقم الهاتف 1
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> رقم الهاتف 2</mat-label>
+                        <input type="text" matInput formControlName="secondMobileNumber" placeholder="  01000012100 " maxlength="11">
+                        <mat-error *ngIf="aI['secondMobileNumber'].errors">* برجاء ادخال رقم الهاتف 2
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>حساب فيسبوك</mat-label>
+                        <input type="url" matInput formControlName="facebook" placeholder="www.facebook.com/username ">
+                        <mat-error *ngIf="aI['facebook'].hasError('required') ">* برجاء ادخال حساب فيسبوك
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>حساب تويتر</mat-label>
+                        <input type="url" matInput formControlName="twitter" placeholder="www.twitter.com/username ">
+                        <mat-error *ngIf="aI['twitter'].hasError('required') ">* برجاء ادخال حساب تويتر
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>حساب انستجرام</mat-label>
+                        <input type="url" matInput formControlName="instagram" placeholder="www.instagram.com/username ">
+                        <mat-error *ngIf="aI['instagram'].hasError('required') ">* برجاء ادخال حساب انستجرام
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>الموقع الالكترونى</mat-label>
+                        <input type="url" matInput formControlName="website" placeholder="www.website.com">
+                        <mat-error *ngIf="aI['website'].hasError('required') ">* برجاء ادخال الموقع الالكترونى
+
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>التفاصيل بالعربية</mat-label>
+                        <textarea type="url" rows="5" matInput formControlName="descriptionAr" placeholder=""></textarea>
+                        <mat-error *ngIf="aI['descriptionAr'].hasError('required') ">* برجاء ادخال التفاصيل بالعربية
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>التفاصيل بالانجليزية</mat-label>
+                        <textarea type="url" rows="5" matInput formControlName="descriptionEn" placeholder=""></textarea>
+                        <mat-error *ngIf="aI['descriptionEn'].hasError('required') ">* برجاء ادخال التفاصيل بالانجليزية
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>عن الشركة بالعربية</mat-label>
+                        <textarea type="url" rows="5" matInput formControlName="aboutUsAr" placeholder=""></textarea>
+                        <mat-error *ngIf="aI['aboutUsAr'].hasError('required') ">* برجاء ادخال عن الشركة بالعربية
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>عن الشركة بالانجليزية</mat-label>
+                        <textarea type="url" rows="5" matInput formControlName="aboutUsEn" placeholder=""></textarea>
+                        <mat-error *ngIf="aI['aboutUsEn'].hasError('required') ">* برجاء ادخال عن الشركة بالانجليزية
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-12">
+                    <add-image [clear]='imageList.length' (imageEmitter)='getImages($event)' [multiple]='true'>
+                    </add-image>
+                    <br>
+                    <image-slider [width]="'50px !important'" [height]=" '50px !important' " [imagesList]="data.images"></image-slider>
+                </div>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end">
+                <div class="col-12 d-flex align-items-center justify-content-end">
+                    <div class="col-12 d-flex align-items-center justify-content-end">
+                        <ng-container *ngIf="!sent; else elseTemplate">
+                            <button mat-raised-button color="primary" type="submit" [disabled]="!aboutInfoForm.valid ">حفظ</button>
+                        </ng-container>
+                        <ng-template #elseTemplate>
+                            <mat-spinner diameter='30' strokeWidth='2' class="my-1"></mat-spinner>
+                        </ng-template>
+                    </div>
+                </div>
+            </mat-dialog-actions>
+        </form>
+    </div>
+</div>

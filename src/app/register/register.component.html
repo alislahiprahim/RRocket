@@ -9,7 +9,7 @@
         <div class="row my-4">
             <div class="col-12 d-flex align-items-center justify-content-center">
                 <div class="mat-elevation-z1 border-radius " style="width: 50rem;  overflow: hidden;">
-                    <mat-horizontal-stepper linear #stepper>
+                    <mat-stepper [orientation]="(stepperOrientation | async)!" linear #stepper>
                         <mat-step [stepControl]="userCodeForm" [editable]="true">
                             <form [formGroup]="userCodeForm">
                                 <ng-template matStepLabel> كود المستخدم </ng-template>
@@ -44,8 +44,6 @@
                                 </mat-form-field>
                                 <div>
                                     <button mat-button matStepperPrevious>السابق</button>
-                                    <button mat-raised-button type="button" color="accent" matStepperNext [disabled]="!teamCodeForm.valid">تحقق من
-                                        الكود</button>
                                     <button mat-raised-button color="primary" matStepperNext [disabled]="!teamCodeForm.valid">التالى</button>
                                 </div>
                             </form>
@@ -127,7 +125,7 @@
                         </mat-step>
 
 
-                    </mat-horizontal-stepper>
+                    </mat-stepper>
                 </div>
             </div>
         </div>

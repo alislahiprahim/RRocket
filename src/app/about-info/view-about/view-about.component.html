@@ -10,6 +10,8 @@
     <div class="row my-3 d-flex flex-wrap align-items-center justify-content-center">
         <ng-container *ngIf="aboutInfoService.aboutInfoList$.getValue().length; else elseTemplate;">
             <mat-card class="my-card" *ngFor="let aboutInfo of aboutInfoService.aboutInfoList$ | async">
+                <img class="my-2" src="{{env.imgBaseUrl}}{{aboutInfo.logoUrl}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
+
                 <mat-card-title>{{aboutInfo.id}}</mat-card-title>
                 <mat-card-subtitle>
                     <h4> {{aboutInfo.name}} &nbsp; </h4>
@@ -19,7 +21,7 @@
                         {{aboutInfo.descriptionAr}} </p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-flat-button color="accent">تعديل</button>
+                    <button mat-flat-button color="accent" (click)="editAboutInfo(aboutInfo)">تعديل</button>
                     <button mat-stroked-button color="primary" (click)="aboutInfoActivation(aboutInfo)">
                         <span *ngIf="!aboutInfo.isActive"> تفعيل</span>
                         <span *ngIf="aboutInfo.isActive">الغاء تفعيل</span>
