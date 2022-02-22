@@ -1,0 +1,49 @@
+.outClients {
+  position: relative;
+  padding: 5px;
+}
+
+.outClients .fa-times-circle {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  cursor: pointer;
+}
+
+.file-upload {
+  width: 80px;
+  height: 50px;
+  border-radius: 12px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  background-size: 100% 200%;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  font-size: 24px;
+}
+
+.file-upload input[type='file'] {
+  height: 50px;
+  width: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload:hover {
+  color: #fff;
+  background-color: var(--accent);
+}
+/*# sourceMappingURL=add-image.component.css.map */

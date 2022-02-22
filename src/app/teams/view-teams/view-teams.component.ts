@@ -43,7 +43,7 @@ export class ViewTeamsComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((result: string) => {
-      if (result === 'DONE') {
+      if (result) {
         this.getAllTeams()
       }
     })
