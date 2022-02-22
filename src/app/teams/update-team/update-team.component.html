@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-12">
-                <add-image [clear]='imageList.length' (imageEmitter)='getImages($event)' [multiple]='true'>
+                <add-image [clear]='imageList.length' (imageEmitter)='getImages($event)' [multiple]='false'>
                 </add-image>
                 <br>
                 <image-slider [width]="'50px !important'" [height]=" '50px !important' " [imagesList]="[data.imageUrl]"></image-slider>

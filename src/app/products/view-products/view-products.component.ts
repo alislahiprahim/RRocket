@@ -1,3 +1,4 @@
+import { EditProductsComponent } from './../edit-products/edit-products.component';
 import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
@@ -23,7 +24,10 @@ export class ViewProductsComponent implements OnInit {
   readonly env = environment;
   filtringSubscription = new Subscription;
 
-  constructor(private dialog: MatDialog, private messageService: MessagesService, public productService: ProductService, public categoryService: CategoryService) { }
+  constructor(private dialog: MatDialog,
+    private messageService: MessagesService,
+    public productService: ProductService,
+    public categoryService: CategoryService) { }
 
   ngOnInit(): void {
 
@@ -41,7 +45,7 @@ export class ViewProductsComponent implements OnInit {
   }
 
 
-  getAllTeams() {
+  getAllProducts() {
     this.productService.getAllProducts()
   }
 
@@ -51,6 +55,7 @@ export class ViewProductsComponent implements OnInit {
 
 
   deleteProduct(item: Product) {
+    debugger
     const dialogRef = this.dialog.open(DeleteComponent, {
       width: 'auto',
       disableClose: true,
@@ -74,6 +79,25 @@ export class ViewProductsComponent implements OnInit {
       }
     })
   }
+
+
+  updateProduct(item: Product) {
+    debugger
+    const dialogRef = this.dialog.open(EditProductsComponent, {
+      data: item,
+      disableClose: true,
+      direction: 'rtl',
+      width: '450px',
+      height:'90%'
+    })
+
+    dialogRef.afterClosed().subscribe((result: string) => {
+      if (result == "DONE") {
+        this.getAllProducts()
+      }
+    })
+  }
+
 
   ngOnDestroy(): void {
 
