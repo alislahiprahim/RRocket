@@ -7,8 +7,8 @@ import { ViewBrandComponent } from './view-brand/view-brand.component';
 const routes: Routes = [
   {
     path: '', component: BrandComponent, children: [
-      { path: '', component: ViewBrandComponent },
-      { path: 'add', component: AddBrandComponent },
+      { path: '', component: ViewBrandComponent, data: { title: '' } },
+      { path: 'add', component: AddBrandComponent, data: { title: 'اضافة' } },
     ]
   }];
 

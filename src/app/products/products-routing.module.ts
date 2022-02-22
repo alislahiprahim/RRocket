@@ -7,7 +7,7 @@ import { ViewProductsComponent } from './view-products/view-products.component';
 const routes: Routes = [{
   path: '', component: ProductsComponent, children: [
     { path: '', component: ViewProductsComponent },
-    { path: 'add', component: AddProductsComponent },
+    { path: 'add', component: AddProductsComponent,data:{ title: 'اضافة' } },
   ]
 }];
 

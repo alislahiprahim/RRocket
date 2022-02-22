@@ -1,0 +1,8 @@
+<ul class="breadcrumb" *ngIf=" router.url != '/login' " style="background-color: transparent;">
+    <i class="fa fa-home text-primary1 mt-1" *ngIf="router.url != '/' "></i>
+    <li *ngFor="let breadcrumb of breadcrumbs" style="background-color: transparent">
+        <a [routerLink]='breadcrumb.url' class='text-secondary1 px-1' style="text-decoration: none;">
+            {{ breadcrumb.label }}
+        </a>
+    </li>
+</ul>

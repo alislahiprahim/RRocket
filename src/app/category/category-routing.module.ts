@@ -7,7 +7,7 @@ import { ViewCategoryComponent } from './view-category/view-category.component';
 const routes: Routes = [{
   path: '', component: CategoryComponent, children: [
     { path: '', component: ViewCategoryComponent },
-    { path: 'add', component: AddCategoryComponent },
+    { path: 'add', component: AddCategoryComponent,data:{title:'اضافة'} },
   ]
 }];
 

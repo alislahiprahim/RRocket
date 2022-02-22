@@ -6,7 +6,7 @@ import { Teams } from '../models/teams.model';
 import { TeamsService } from '../teams.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteComponent } from 'src/app/shared/compontents/delete/delete.component';
- 
+
 @Component({
   templateUrl: './view-teams.component.html',
 
@@ -16,7 +16,7 @@ export class ViewTeamsComponent implements OnInit {
   teamView: number = 2;
   displayedColumns: string[] = ['photo', 'name', 'teamCode', 'actions'];
 
- 
+
   readonly env = environment
 
   constructor(public teamsService: TeamsService,
@@ -62,7 +62,8 @@ export class ViewTeamsComponent implements OnInit {
         this.teamsService.deleteTeam(result.id).subscribe({
           next: (resp: boolean) => {
             if (resp) {
-              this.teamView = 2
+              this.teamView = 1
+              setTimeout(() => this.teamView = 2);
               this.messageService.topRightSuccessToast('تم الحذف بنجاح');
               this.teamsService.teamsList$.value.splice(this.teamsService.teamsList$.value.indexOf(item), 1)
               this.teamsService.teamsList$.next(this.teamsService.teamsList$.value)

@@ -26,7 +26,9 @@ import { DeleteComponent } from './compontents/delete/delete.component';
 import { ActivateComponent } from './compontents/activate/activate.component';
 import { LogoComponent } from './compontents/logo/logo.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { BreadCrumbComponent } from './compontents/bread-crumb/bread-crumb.component';
+import { RouterModule } from '@angular/router';
+ 
 
 @NgModule({
   declarations: [
@@ -35,12 +37,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ImageSliderComponent,
     DeleteComponent,
     ActivateComponent,
-    LogoComponent
+    LogoComponent,
+    BreadCrumbComponent
   ],
   imports: [
     MatInputModule,
     CommonModule,
     MatButtonModule,
+    RouterModule
   ],
   exports: [
     CommonModule,
@@ -68,8 +72,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ImageSliderComponent,
     MatTableModule,
     LogoComponent,
+    BreadCrumbComponent,
     MatCheckboxModule
 
   ]
+
 })
 export class SharedModule { }

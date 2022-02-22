@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '', component: AboutInfoComponent, children: [
       { path: '', component: ViewAboutComponent },
-      { path: 'add', component: AddAboutComponent },
+      { path: 'add', component: AddAboutComponent ,data: { title: 'اضافة' }},
     ]
   }
 ];
