@@ -31,4 +31,13 @@ export class CategoryService {
         })
     }
 
+  UpdateCategory(data: any): Observable<any> {
+    return this.http.put(env.baseUrl + 'categories', data).pipe(catchError(err => { return throwError(err) }))
+  }
+
+
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(env.baseUrl + `categories/${id}`).pipe(catchError(err => { return throwError(err) }))
+  }
+
 }
