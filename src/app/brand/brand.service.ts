@@ -26,4 +26,13 @@ export class BrandService {
     addBrand(data: any): Observable<any> {
         return this.http.post(env.baseUrl + 'brands', data).pipe(catchError(err => { return throwError(err) }))
     }
+
+  UpdateBrand(data: any): Observable<any> {
+    return this.http.put(env.baseUrl + 'brands', data).pipe(catchError(err => { return throwError(err) }))
+  }
+
+
+  deleteBrand(id: number): Observable<any> {
+    return this.http.delete(env.baseUrl + `brands/${id}`).pipe(catchError(err => { return throwError(err) }))
+  }
 }

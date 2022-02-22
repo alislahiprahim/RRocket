@@ -7,32 +7,36 @@ import { Product } from "./models/product.model";
 
 export class ProductService {
 
-    productList$ = new BehaviorSubject<Product[]>([])
-    filteredProductList$ = new BehaviorSubject<Product[]>([])
+  productList$ = new BehaviorSubject<Product[]>([])
+  filteredProductList$ = new BehaviorSubject<Product[]>([])
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
 
-    getAllProducts() {
-        this.http.get(env.baseUrl + 'products').subscribe({
-            next: (resp: any) => {
-                if (resp.isSuccess) {
-                    this.productList$.next(resp.data)
-                    this.filteredProductList$.next(resp.data)
-                } else {
-                    this.productList$.next([])
-                    this.filteredProductList$.next([])
-                }
-            }
-        })
-    }
+  getAllProducts() {
+    this.http.get(env.baseUrl + 'products').subscribe({
+      next: (resp: any) => {
+        if (resp.isSuccess) {
+          this.productList$.next(resp.data)
+          this.filteredProductList$.next(resp.data)
+        } else {
+          this.productList$.next([])
+          this.filteredProductList$.next([])
+        }
+      }
+    })
+  }
 
-    addProduct(data: any): Observable<any> {
-        return this.http.post(env.baseUrl + 'products', data).pipe(catchError(err => { return throwError(err) }))
-    }
+  addProduct(data: any): Observable<any> {
+    return this.http.post(env.baseUrl + 'products', data).pipe(catchError(err => { return throwError(err) }))
+  }
 
-    deleteProduct(id: number): Observable<any> {
-        return this.http.delete(env.baseUrl + `products/${id}`).pipe(catchError(err => { return throwError(err) }))
-    }
+  UpdateProduct(data: any): Observable<any> {
+    return this.http.put(env.baseUrl + 'products', data).pipe(catchError(err => { return throwError(err) }))
+  }
+
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(env.baseUrl + `products/${id}`).pipe(catchError(err => { return throwError(err) }))
+  }
 
 }

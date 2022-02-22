@@ -24,7 +24,7 @@ import { ProductService } from '../product.service';
   ]
 })
 export class AddProductsComponent implements OnInit {
-  
+
   readonly closthSizes = closthSizes
   readonly env = environment
   sent: boolean = false;
@@ -61,7 +61,6 @@ export class AddProductsComponent implements OnInit {
 
 
   submit() {
-
     this.sent = true;
     let formData = new FormData();
     let form = this.productsForm.value;

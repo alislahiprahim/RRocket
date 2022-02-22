@@ -20,8 +20,8 @@
 
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-flat-button color="accent">تعديل</button>
-                    <button mat-stroked-button color="warn">حذف</button>
+                    <button mat-flat-button color="accent" (click)="updateBrand(brand)">تعديل</button>
+                    <button mat-stroked-button color="warn" (click)="deleteBrand(brand)">حذف</button>
                 </mat-card-actions>
             </mat-card>
         </ng-container>

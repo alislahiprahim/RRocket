@@ -2,7 +2,7 @@
 
     <div class="  d-flex align-items-center justify-content-between  ">
         <h3>المنتجات</h3>
-        <i class="fas fa-redo" style="color: var(--accent);" (click)="getAllTeams()"></i>
+        <i class="fas fa-redo" style="color: var(--accent);" (click)="getAllProducts()"></i>
     </div>
     <div class="row">
 
@@ -52,7 +52,7 @@
                         <span>الخصم : {{product.discountPrice }} %</span>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-flat-button color="accent">تعديل</button>
+                        <button mat-flat-button color="accent" (click)="updateProduct(product)">تعديل</button>
                         <button mat-stroked-button color="warn" (click)="deleteProduct(product)">حذف</button>
                     </mat-card-actions>
                 </mat-card>
@@ -116,7 +116,7 @@
                     <th mat-header-cell *matHeaderCellDef> اجراءات </th>
                     <td mat-cell *matCellDef="let element ">
                         <i class="fa fa-trash-alt fa-xs text-light" style="background-color:var(--primary); padding: 7px; border-radius: 50%;" (click)="deleteProduct(element)"></i>
-                        <i class="fa fa-pen fa-xs text-light mx-1" style="background-color:var(--accent); padding: 7px; border-radius: 50%;"></i>
+                        <i class="fa fa-pen fa-xs text-light mx-1" style="background-color:var(--accent); padding: 7px; border-radius: 50%;" (click)="updateProduct(element)"></i>
                     </td>
                 </ng-container>
 
