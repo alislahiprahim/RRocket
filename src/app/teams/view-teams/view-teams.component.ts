@@ -43,7 +43,7 @@ export class ViewTeamsComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((result: string) => {
-      if (result === 'DONE') {
+      if (result) {
         this.getAllTeams()
       }
     })
@@ -63,6 +63,7 @@ export class ViewTeamsComponent implements OnInit {
           next: (resp: TeamsResponse) => {
             if (resp.message == '' || resp.isSuccess == true) {
               this.messageService.deleteSuccessToast('تم الحذف بنجاح');
+              this.getAllTeams()
             } else {
               this.messageService.deleteFailureToast(resp.message);
             }
