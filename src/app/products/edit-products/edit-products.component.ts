@@ -5,8 +5,7 @@ import { ViewProductsComponent } from './../view-products/view-products.componen
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MessagesService } from 'src/app/services/messages.service';
-import { BrandService } from 'src/app/brand/brand.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -72,8 +71,7 @@ export class EditProductsComponent implements OnInit {
   UpdateProduct(data: any) {
     this.MyProductService.UpdateProduct(data).subscribe({
       next: (resp: ProductResponse) => {
-        debugger
-        this.sent = false;
+         this.sent = false;
         if (resp.message == '' || resp.isSuccess == true) {
           this.messageService.successToast('تم تعديل المنتج بنجاح');
           this.dialogRef.close('DONE')
@@ -83,8 +81,7 @@ export class EditProductsComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        debugger
-        this.messageService.errorToast(err.error.errors[0]);
+         this.messageService.errorToast(err.error.errors);
         this.sent = false;
       },
       complete: () => { this.sent = false; }

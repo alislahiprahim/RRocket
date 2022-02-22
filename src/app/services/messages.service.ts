@@ -25,7 +25,7 @@ export class MessagesService {
             title: '...عفوا',
             text: text,
             confirmButtonText: 'تم',
-            confirmButtonColor: '#FFC400',
+            confirmButtonColor: 'var(--primary)',
             timer: 2000,
             timerProgressBar: true,
             didOpen: (toast) => {

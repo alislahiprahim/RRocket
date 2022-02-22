@@ -60,8 +60,9 @@ export class AddTeamsComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        this.messageService.errorToast(err.error.errors[0]);
         this.sent = false;
+
+        this.messageService.errorToast(err.error.errors[0]);
       },
       complete: () => { this.sent = false; }
     })

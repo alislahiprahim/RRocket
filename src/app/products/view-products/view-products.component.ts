@@ -17,11 +17,11 @@ import { ProductService } from '../product.service';
 })
 export class ViewProductsComponent implements OnInit {
 
+  readonly env = environment;
   productView: number = 2;
   displayedColumns: string[] = ['images', 'nameAr', 'nameEn', 'originalPrice', 'discountPrice', 'clothGender', 'clothSize', 'actions'];
 
   filteredCategoryValue = new FormControl(null);
-  readonly env = environment;
   filtringSubscription = new Subscription;
 
   constructor(private dialog: MatDialog,
@@ -65,11 +65,11 @@ export class ViewProductsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result.message === 'DELETE') {
         this.productService.deleteProduct(result.id).subscribe({
-          next: (resp: ProductResponse) => {
-            if (resp.message == '' || resp.isSuccess == true) {
+          next: (resp: boolean) => {
+            if (resp) {
               this.messageService.topRightSuccessToast('تم الحذف بنجاح');
             } else {
-              this.messageService.topRightFailureToast(resp.message);
+              this.messageService.topRightFailureToast('خطا فى الحذف');
             }
           },
           error: (err: any) => {
@@ -82,13 +82,11 @@ export class ViewProductsComponent implements OnInit {
 
 
   updateProduct(item: Product) {
-    debugger
-    const dialogRef = this.dialog.open(EditProductsComponent, {
+     const dialogRef = this.dialog.open(EditProductsComponent, {
       data: item,
       disableClose: true,
       direction: 'rtl',
-      width: '450px',
-      height:'90%'
+      width: '450px'
     })
 
     dialogRef.afterClosed().subscribe((result: string) => {
