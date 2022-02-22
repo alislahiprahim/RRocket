@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { LoaderService } from './services/loader.service';
 import { MessagesService } from './services/messages.service';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MessagesService } from './services/messages.service';
     MessagesService,
     { provide: HTTP_INTERCEPTORS, useClass: MyHttpInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent]
 })

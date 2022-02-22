@@ -25,7 +25,7 @@ export class MessagesService {
             title: '...عفوا',
             text: text,
             confirmButtonText: 'تم',
-            confirmButtonColor: '#FFC400',
+            confirmButtonColor: 'var(--primary)',
             timer: 2000,
             timerProgressBar: true,
             didOpen: (toast) => {
@@ -51,7 +51,7 @@ export class MessagesService {
         })
     }
 
-    deleteSuccessToast(text:string) {
+    topRightSuccessToast(text:string) {
 
         Toast.fire({
             icon: 'success',
@@ -59,7 +59,7 @@ export class MessagesService {
         })
     }
 
-    deleteFailureToast(text: string) {
+    topRightFailureToast(text: string) {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',

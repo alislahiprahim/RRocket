@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '', component: TeamsComponent, children: [
       { path: '', component: ViewTeamsComponent },
-      { path: 'add', component: AddTeamsComponent },
+      { path: 'add', component: AddTeamsComponent, data: { title: 'اضافة' } },
     ]
   }
 ];

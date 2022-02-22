@@ -82,14 +82,14 @@ export class ViewCategoryComponent implements OnInit {
         this.categoryService.deleteCategory(result.id).subscribe({
           next: (resp: boolean) => {
             if (resp == true) {
-              this.messageService.deleteSuccessToast('تم الحذف بنجاح');
+              this.messageService.topRightSuccessToast('تم الحذف بنجاح');
               this.getAllCategory()
             } else {
-              this.messageService.deleteFailureToast("حدث خطأ");
+              this.messageService.topRightFailureToast("خطا فى الحذف");
             }
           },
           error: (err: any) => {
-            this.messageService.deleteFailureToast(err.error.errors[0]);
+            this.messageService.topRightFailureToast(err.error.errors[0]);
           }
         })
       }

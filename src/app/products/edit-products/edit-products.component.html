@@ -1,117 +1,120 @@
 <div class="container-fluid">
 
     <div class="d-flex align-items-center justify-content-between">
-        <h3>تعديل المنتج </h3>
-        <a (click)="dialogRef.close(false)"> <i class="fas fa-times"></i> </a>
+        <h3 mat-dialog-title>تعديل المنتج </h3>
+        <a (click)="dialogRef.close()"> <i class="fas fa-times"></i> </a>
     </div>
     <div class="row">
         <hr>
     </div>
     <div class="row my-3">
         <form [formGroup]="UpdateProductForm" (ngSubmit)="submit()">
+            <mat-dialog-content class="mat-typography">
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> اسم المنتج بالعربية </mat-label>
+                        <input type="text" matInput formControlName="nameAr" placeholder=" اسم المنتج بالعربية" maxlength="25">
+                        <mat-error *ngIf="p['nameAr'].hasError('required')  ">* برجاء ادخال اسم المنتج بالعربية
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> اسم المنتج بالانجليزية </mat-label>
+                        <input type="text" matInput formControlName="nameEn" placeholder=" اسم المنتج بالانجليزية " maxlength="25">
+                        <mat-error *ngIf="p['nameEn'].hasError('required')  ">* برجاء ادخال اسم المنتج بالانجليزية
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>الفئة </mat-label>
+                        <mat-select formControlName="categoryId">
+                            <mat-option [value]="cat.id" *ngFor="let cat of  MyCategoryService.categoryList$ | async">
+                                <div class="w-100 d-flex align-items-center justify-content-between">
+                                    <span>{{cat.name}}</span>
+                                    <img src="{{env.imgBaseUrl}}{{cat.imagePath}}" style="width: 70px;height:30px;">
+                                </div>
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf=" p['categoryId'].hasError('required') ">* برجاء ادخال كود المنتج
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> اسم سعر المنتج </mat-label>
+                        <input type="text" matInput formControlName="originalPrice" placeholder="25.50" maxlength="25">
+                        <mat-error *ngIf="p['originalPrice'].hasError('required')  ">* برجاء ادخال سعر المنتج
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> اسم خصم المنتج </mat-label>
+                        <input type="text" matInput formControlName="discountPrice" placeholder="7%" maxlength="25">
+                        <mat-error *ngIf="p['discountPrice'].hasError('required')  ">* برجاء ادخال خصم المنتج
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>نسبة العمولة المباشرة </mat-label>
+                        <input type="text" matInput formControlName="directCommissionPercentage" placeholder="نسبة العمولة المباشرة " maxlength="25">
+                        <mat-error *ngIf="p['directCommissionPercentage'].hasError('required')  ">* برجاء ادخال نسبة العمولة المباشرة
+                        </mat-error>
+                    </mat-form-field>
+                </div>
 
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label> اسم المنتج بالعربية </mat-label>
-                    <input type="text" matInput formControlName="nameAr" placeholder=" اسم المنتج بالعربية" maxlength="25">
-                    <mat-error *ngIf="p['nameAr'].hasError('required')  ">* برجاء ادخال اسم المنتج بالعربية
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label> اسم المنتج بالانجليزية </mat-label>
-                    <input type="text" matInput formControlName="nameEn" placeholder=" اسم المنتج بالانجليزية " maxlength="25">
-                    <mat-error *ngIf="p['nameEn'].hasError('required')  ">* برجاء ادخال اسم المنتج بالانجليزية
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label>الفئة </mat-label>
-                    <mat-select formControlName="categoryId">
-                        <mat-option [value]="cat.id" *ngFor="let cat of  MyCategoryService.categoryList$ | async">
-                            <div class="w-100 d-flex align-items-center justify-content-between">
-                                <span>{{cat.name}}</span>
-                                <img src="{{env.imgBaseUrl}}{{cat.imagePath}}" style="width: 70px;height:30px;">
-                            </div>
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf=" p['categoryId'].hasError('required') ">* برجاء ادخال كود المنتج
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label> اسم سعر المنتج </mat-label>
-                    <input type="text" matInput formControlName="originalPrice" placeholder="25.50" maxlength="25">
-                    <mat-error *ngIf="p['originalPrice'].hasError('required')  ">* برجاء ادخال سعر المنتج
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label> اسم خصم المنتج </mat-label>
-                    <input type="text" matInput formControlName="discountPrice" placeholder="7%" maxlength="25">
-                    <mat-error *ngIf="p['discountPrice'].hasError('required')  ">* برجاء ادخال خصم المنتج
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label>نسبة العمولة المباشرة </mat-label>
-                    <input type="text" matInput formControlName="directCommissionPercentage" placeholder="نسبة العمولة المباشرة " maxlength="25">
-                    <mat-error *ngIf="p['directCommissionPercentage'].hasError('required')  ">* برجاء ادخال نسبة العمولة المباشرة
-                    </mat-error>
-                </mat-form-field>
-            </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label>مقاس المنتج </mat-label>
+                        <mat-select formControlName="clothSize">
+                            <mat-option *ngFor="let cs of closthSizes" [value]="cs.id">{{cs.name}}</mat-option>
+                        </mat-select>
 
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label>مقاس المنتج </mat-label>
-                    <mat-select formControlName="clothSize">
-                        <mat-option *ngFor="let cs of closthSizes" [value]="cs.id">{{cs.name}}</mat-option>
-                    </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field class="w-100" appearance='outline'>
+                        <mat-label> تفاصيل المنتج </mat-label>
+                        <textarea type="text" rows="5" matInput formControlName="description" placeholder=" تفاصيل المنتج  "></textarea>
+                        <mat-error *ngIf="p['description'].hasError('required')  ">* برجاء ادخال تفاصيل المنتج
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="w-100">
+                    <mat-label>النوع </mat-label>
+                    <mat-radio-group formControlName="clothGender" class="example-radio-group">
 
-                </mat-form-field>
-            </div>
-            <div class="col-12">
-                <mat-form-field class="w-100" appearance='outline'>
-                    <mat-label> تفاصيل المنتج </mat-label>
-                    <textarea type="text" rows="5" matInput formControlName="description" placeholder=" تفاصيل المنتج  "></textarea>
-                    <mat-error *ngIf="p['description'].hasError('required')  ">* برجاء ادخال تفاصيل المنتج
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="w-100">
-                <mat-label>النوع </mat-label>
-                <mat-radio-group formControlName="clothGender" class="example-radio-group">
-
-                    <mat-radio-button class="example-radio-button" value="Men">
-                        ذكر
-                    </mat-radio-button>
-                    <mat-radio-button class="example-radio-button" value="Female">
-                        انثى
-                    </mat-radio-button>
-                </mat-radio-group>
-            </div>
+                        <mat-radio-button class="example-radio-button" value="Men">
+                            ذكر
+                        </mat-radio-button>
+                        <mat-radio-button class="example-radio-button" value="Female">
+                            انثى
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
 
 
-            <div class="col-12">
-                <add-image [clear]='imageList.length' (imageEmitter)='getImages($event)' [multiple]='true'>
-                </add-image>
-                <br>
-                <image-slider [width]="'50px !important'" [height]=" '50px !important' " [imagesList]="data.images"></image-slider>
-            </div>
+                <div class="col-12">
+                    <add-image [clear]='imageList.length' (imageEmitter)='getImages($event)' [multiple]='true'>
+                    </add-image>
+                    <br>
+                    <image-slider [width]="'50px !important'" [height]=" '50px !important' " [imagesList]="data.images"></image-slider>
+                </div>
+            </mat-dialog-content>
+            <mat-dialog-actions align="end">
+                <div class="col-12 d-flex align-items-center justify-content-end">
+                    <ng-container *ngIf="!sent; else elseTemplate">
+                        <button mat-raised-button color="primary" type="submit" [disabled]="!UpdateProductForm.valid ">حفظ</button>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                        <mat-spinner diameter='30' strokeWidth='2' class="my-1"></mat-spinner>
+                    </ng-template>
+                </div>
+            </mat-dialog-actions>
 
-            <div class="col-12 d-flex align-items-center justify-content-end">
-                <ng-container *ngIf="!sent; else elseTemplate">
-                    <button mat-raised-button color="primary" type="submit" [disabled]="!UpdateProductForm.valid ">حفظ</button>
-                </ng-container>
-                <ng-template #elseTemplate>
-                    <mat-spinner diameter='30' strokeWidth='2' class="my-1"></mat-spinner>
-                </ng-template>
-            </div>
         </form>
     </div>
 </div>

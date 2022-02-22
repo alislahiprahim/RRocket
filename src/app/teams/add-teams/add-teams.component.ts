@@ -53,6 +53,8 @@ export class AddTeamsComponent implements OnInit {
         this.sent = false;
         if (resp.message == '' || resp.isSuccess == true) {
           this.messageService.successToast('تم اضافة عن فريق بنجاح');
+          this.teamsService.teamsList$.value.push(resp.data)
+          this.teamsService.teamsList$.next(this.teamsService.teamsList$.value)
           resetform(this.teamsForm);
           this.imageList = []
         } else {
@@ -60,8 +62,9 @@ export class AddTeamsComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        this.messageService.errorToast(err.error.errors[0]);
         this.sent = false;
+
+        this.messageService.errorToast(err.error.errors[0]);
       },
       complete: () => { this.sent = false; }
     })

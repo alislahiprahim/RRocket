@@ -9,7 +9,7 @@ export interface Teams {
 export interface TeamsResponse {
     errors: any;
     status: number;
-    data: any;
+    data: Teams;
     message: string;
     isSuccess: boolean;
 

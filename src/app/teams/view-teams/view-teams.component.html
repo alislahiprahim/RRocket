@@ -7,14 +7,14 @@
     <div class="row">
         <hr>
     </div>
-    <div class="row">
+    <div class="row  my-2">
         <div class="col-12 d-flex justify-content-end align-items-center">
-            <div class="d-flex align-items-center justify-content-center">
 
-                <button mat-button (click)="teamView = 1" [ngStyle]="{'background-color': teamView == 1 ? 'var(--primary)' :'#fff'}"><i class="fa fa-th"></i></button>
-                <button mat-button (click)="teamView = 2" [ngStyle]="{'background-color': teamView == 2 ? 'var(--primary)' :'#fff'}"><i class="fa fa-th-list"></i></button>
+            <button mat-button (click)="teamView = 1" [ngStyle]="{'background-color': teamView == 1 ? 'var(--primary)' :'#fff'}"><i
+                    class="fa fa-th"></i></button>
+            <button mat-button (click)="teamView = 2" [ngStyle]="{'background-color': teamView == 2 ? 'var(--primary)' :'#fff'}"><i
+                    class="fa fa-th-list"></i></button>
 
-            </div>
         </div>
     </div>
     <div class="row">
@@ -33,8 +33,8 @@
                         <p> كود الفريق : {{team.teamCode}} </p>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-flat-button color="accent">تعديل</button>
-                        <button mat-stroked-button color="warn">حذف</button>
+                        <button mat-flat-button color="accent" (click)="updateTeam(team)">تعديل</button>
+                        <button mat-stroked-button color="warn" (click)="deleteTeam(team)">حذف</button>
                     </mat-card-actions>
                 </mat-card>
             </ng-container>
@@ -45,42 +45,49 @@
         </div>
     </ng-container>
     <ng-template #elseTemplate1>
-        <div class="row">
-            <table mat-table [dataSource]="teamsService.teamsList$.value" class=" mat-elevation-z8 ">
+        <div class="row" style="height: 400px; overflow: auto;">
+            <ng-container *ngIf="teamsService.teamsList$.value.length else elseTemplate2">
+                <table mat-table [dataSource]="teamsService.teamsList$.value" class=" mat-elevation-z8 w-100 ">
 
-                <!--  Column -->
-                <ng-container matColumnDef="photo">
-                    <th mat-header-cell *matHeaderCellDef> الصور </th>
-                    <td mat-cell *matCellDef="let element ">
-                        <image-slider [width]="'50px !important'" [height]=" '50px !important' " [navs]="false" [imagesList]="[element.imageUrl]"></image-slider>
-                    </td>
-                </ng-container>
+                    <!--  Column -->
+                    <ng-container matColumnDef="photo">
+                        <th mat-header-cell *matHeaderCellDef> الصور </th>
+                        <td mat-cell *matCellDef="let element ">
+                            <image-slider [width]="'50px !important'" [height]=" '50px !important' " [navs]="false" [imagesList]="[element.imageUrl]"></image-slider>
+                        </td>
+                    </ng-container>
 
-                <!--  Column -->
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> الاسم </th>
-                    <td mat-cell *matCellDef="let element "> {{element.name}} </td>
-                </ng-container>
+                    <!--  Column -->
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> الاسم </th>
+                        <td mat-cell *matCellDef="let element "> {{element.name}} </td>
+                    </ng-container>
 
-                <!--  Column -->
-                <ng-container matColumnDef="teamCode">
-                    <th mat-header-cell *matHeaderCellDef> كود الفريق </th>
-                    <td mat-cell *matCellDef="let element "> {{element.teamCode}} </td>
-                </ng-container>
+                    <!--  Column -->
+                    <ng-container matColumnDef="teamCode">
+                        <th mat-header-cell *matHeaderCellDef> كود الفريق </th>
+                        <td mat-cell *matCellDef="let element "> {{element.teamCode}} </td>
+                    </ng-container>
 
 
-                <!--  Column -->
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef> اجراءات </th>
-                    <td mat-cell *matCellDef="let element ">
-                        <i class="fa fa-trash-alt fa-xs text-light" style="background-color:var(--primary); padding: 7px; border-radius: 50%;" (click)="deleteTeam(element)"></i>
-                        <i class="fa fa-pen fa-xs text-light mx-1" style="background-color:var(--accent); padding: 7px; border-radius: 50%;" (click)="updateTeam(element)"></i>
-                    </td>
-                </ng-container>
+                    <!--  Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef> اجراءات </th>
+                        <td mat-cell *matCellDef="let element ">
+                            <i class="fa fa-trash-alt fa-xs text-light" style="background-color:var(--primary); padding: 7px; border-radius: 50%;" (click)="deleteTeam(element)"></i>
+                            <i class="fa fa-pen fa-xs text-light mx-1" style="background-color:var(--accent); padding: 7px; border-radius: 50%;" (click)="updateTeam(element)"></i>
+                        </td>
+                    </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
-            </table>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+                </table>
+            </ng-container>
+            <ng-template #elseTemplate2>
+                <p>لا توجد بيانات مضافة</p>
+            </ng-template>
+
+
         </div>
     </ng-template>
 

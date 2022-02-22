@@ -60,13 +60,13 @@ export class ViewBrandComponent implements OnInit {
           next: (resp: boolean) => {
             if (resp == true) {
               this.getAllTeams()
-              this.messageService.deleteSuccessToast('تم الحذف بنجاح');
+              this.messageService.topRightSuccessToast('تم الحذف بنجاح');
             } else {
-              this.messageService.deleteFailureToast("حدث خطأ");
+              this.messageService.topRightFailureToast("حدث خطأ");
             }
           },
           error: (err: any) => {
-            this.messageService.deleteFailureToast(err.error.errors[0]);
+            this.messageService.topRightFailureToast(err.error);
           }
         })
       }

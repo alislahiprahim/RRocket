@@ -19,7 +19,7 @@
                                 </mat-form-field>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <div>
-                                        <button mat-raised-button color="primary" matStepperNext [disabled]="!userCodeForm.valid">التالى</button>
+                                        <button mat-raised-button color="primary" matStepperNext (click)="checkParentCodeExists()" [disabled]="!userCodeForm.valid">التالى</button>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-4">
 
@@ -44,7 +44,7 @@
                                 </mat-form-field>
                                 <div>
                                     <button mat-button matStepperPrevious>السابق</button>
-                                    <button mat-raised-button color="primary" matStepperNext [disabled]="!teamCodeForm.valid">التالى</button>
+                                    <button mat-raised-button color="primary" matStepperNext (click)="checkUserCodeExists()" [disabled]="!teamCodeForm.valid">التالى</button>
                                 </div>
                             </form>
                         </mat-step>
