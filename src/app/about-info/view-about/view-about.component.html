@@ -8,9 +8,9 @@
         <hr>
     </div>
     <div class="row my-3 d-flex flex-wrap align-items-center justify-content-center">
-        <ng-container *ngIf="aboutInfoService.aboutInfoList$.getValue().length; else elseTemplate;">
-            <mat-card class="my-card" *ngFor="let aboutInfo of aboutInfoService.aboutInfoList$ | async">
-                <img class="my-2" src="{{aboutInfo.logoUrl}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
+        <ng-container *ngIf="(aboutInfoList$ | async) as aboutInfoList else elseTemplate;">
+            <mat-card class="my-card" *ngFor="let aboutInfo of aboutInfoList">
+                <img loading="lazy" class="my-2" src="{{aboutInfo.logoUrl}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
                 <image-slider [width]="'250px !important'" [height]=" '230px !important' " [imagesList]="aboutInfo.images"></image-slider>
                 <mat-card-title>{{aboutInfo.id}}</mat-card-title>
                 <mat-card-subtitle>

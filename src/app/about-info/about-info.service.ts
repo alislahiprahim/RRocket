@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AboutInfo, AboutInfoResponse } from './models/aboutInfo.model';
 import { environment as env } from 'src/environments/environment';
-import { BehaviorSubject, catchError, delay, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, delay, map, Observable, shareReplay } from 'rxjs';
 @Injectable()
 export class AboutInfoService {
 
@@ -14,23 +14,18 @@ export class AboutInfoService {
     return this.http.post(env.baseUrl + 'AboutInfos', data).pipe(catchError(err => { return err }));
   }
 
-  getAllAboutInfo() {
-    this.http.get(env.baseUrl + 'AboutInfos').subscribe({
-      next: (resp: any) => {
-        if (resp.isSuccess) {
-          this.aboutInfoList$.next(resp.data)
-        } else {
-          this.aboutInfoList$.next([])
-        }
-      }
-    })
+  getAllAboutInfo(): Observable<AboutInfo[]> {
+    return this.http.get<AboutInfo[]>(env.baseUrl + 'AboutInfos').pipe(
+      map((res: any) => res['data']),
+      shareReplay()
+    )
   }
 
   aboutInfoActivation(id: number): Observable<any> {
     return this.http.put(env.baseUrl + `AboutInfos/Activation/${id}`, null).pipe(catchError(err => { return err }));
   }
 
-  editAboutInfo( data: AboutInfo): Observable<any> {
+  editAboutInfo(data: AboutInfo): Observable<any> {
     return this.http.put(env.baseUrl + `AboutInfos`, data).pipe(catchError(err => { return err }));
   }
 }

@@ -33,7 +33,7 @@
                         <mat-option [value]="brand.id" *ngFor="let brand of  brandService.brandList$ | async">
                             <div class="w-100 d-flex align-items-center justify-content-between">
                                 <span>{{brand.name}}</span>
-                                <img src="{{env.imgBaseUrl}}{{brand.imagePath}}" style="width: 70px;height:30px;">
+                                <img loading="lazy" src="{{env.imgBaseUrl}}{{brand.imagePath}}" style="width: 70px;height:30px;">
                             </div>
                         </mat-option>
                     </mat-select>
