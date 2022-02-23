@@ -6,6 +6,7 @@ import { ActivateComponent } from 'src/app/shared/compontents/activate/activate.
 import { AboutInfo, AboutInfoResponse } from '../models/aboutInfo.model';
 import { MessagesService } from 'src/app/services/messages.service';
 import { EditAboutComponent } from '../edit-about/edit-about.component';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'view-about',
   templateUrl: './view-about.component.html',
@@ -14,16 +15,17 @@ import { EditAboutComponent } from '../edit-about/edit-about.component';
 export class ViewAboutComponent implements OnInit {
 
   readonly env = environment
+  aboutInfoList$!: Observable<AboutInfo[]>
 
   constructor(private dialog: MatDialog, public aboutInfoService: AboutInfoService, private messageService: MessagesService) { }
 
   ngOnInit(): void {
-    this.aboutInfoService.aboutInfoList$.value.length == 0 ? this.aboutInfoService.getAllAboutInfo() : null;
+    this.getAllAboutInfo()
   }
 
 
   getAllAboutInfo() {
-    this.aboutInfoService.getAllAboutInfo()
+    this.aboutInfoList$ = this.aboutInfoService.getAllAboutInfo();
   }
 
 

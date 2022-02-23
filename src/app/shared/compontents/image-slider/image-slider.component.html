@@ -1,11 +1,11 @@
 <ng-container *ngIf="imagesList.length != 0 ; else elseTemplate">
     <div style="width: auto !important; overflow: hidden; padding: 10px;">
-        <img [style]="'height: '+ height + ';width: '+ width" [@fadeInRight]="animateToRight" [@fadeInLeft]="animateToleft" class="mat-elevation-z1" src="{{env.imgBaseUrl}}{{imagesList[currentViewedImage]}}" onerror="this.src='../../../../assets/images/icons/image-not-found.png'">
+        <img loading="lazy" [style]="'height: '+ height + ';width: '+ width" [@fadeInRight]="animateToRight" [@fadeInLeft]="animateToleft" class="mat-elevation-z1" src="{{env.imgBaseUrl}}{{imagesList[currentViewedImage]}}" onerror="this.src='../../../../assets/images/icons/image-not-found.png'">
     </div>
 </ng-container>
 <ng-template #elseTemplate>
     <div>
-        <img class="mat-elevation-z1" src="{{env.imgBaseUrl}}{{imagesList[0]}}" onerror="this.src='../../../../assets/images/icons/image-not-found.png'">
+        <img loading="lazy" class="mat-elevation-z1" src="{{env.imgBaseUrl}}{{imagesList[0]}}" onerror="this.src='../../../../assets/images/icons/image-not-found.png'">
     </div>
 </ng-template>
 

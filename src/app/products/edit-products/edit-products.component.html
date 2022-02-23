@@ -33,7 +33,7 @@
                             <mat-option [value]="cat.id" *ngFor="let cat of  MyCategoryService.categoryList$ | async">
                                 <div class="w-100 d-flex align-items-center justify-content-between">
                                     <span>{{cat.name}}</span>
-                                    <img src="{{env.imgBaseUrl}}{{cat.imagePath}}" style="width: 70px;height:30px;">
+                                    <img loading="lazy" src="{{env.imgBaseUrl}}{{cat.imagePath}}" style="width: 70px;height:30px;">
                                 </div>
                             </mat-option>
                         </mat-select>

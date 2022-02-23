@@ -11,7 +11,7 @@
     <div class="row my-3 d-flex flex-wrap align-items-center justify-content-center">
         <ng-container *ngIf="brandService.brandList$.value.length; else elseTemplate;">
             <mat-card class="my-card" *ngFor="let brand of brandService.brandList$ | async">
-                <img class="my-2" src="{{env.imgBaseUrl}}{{brand.imagePath}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
+                <img loading="lazy" class="my-2" src="{{env.imgBaseUrl}}{{brand.imagePath}}" onerror="this.src='../../../assets/images/icons/image-not-found.png'">
                 <mat-card-title>رقم : {{brand.id}}</mat-card-title>
                 <mat-card-subtitle>
                     <h4> {{brand.name}} &nbsp; </h4>
