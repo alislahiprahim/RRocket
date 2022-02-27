@@ -5,7 +5,7 @@ import { Component, Input, OnInit } from '@angular/core';
   template: `
   <div class="d-flex align-items-end justify-content-start" [style]="'transform: ' + scale" dir="ltr">
        <img  class="logo-img" src="../../../../assets/images/logos/r-rocket.png" >
-     <div class="logo-text d-flex flex-column align-items-start" [style]="'color: '+ color +' !important'">
+     <div *ngIf="!logoOnly" class="logo-text d-flex flex-column align-items-start" [style]="'color: '+ color +' !important'">
       <h5>ROCKET</h5>
       <h6>ALWAYS YOU FAST</h6>
     </div>
@@ -50,7 +50,7 @@ export class LogoComponent implements OnInit {
 
   @Input() color: string = ''
   @Input() scale: string = ''
-
+  @Input() logoOnly: boolean = false;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,109 @@
+<mat-toolbar color="accent" class="example-toolbar fixed-top mat-elevation-z1 ">
+    <div class="container-fluid d-flex align-items-center justify-content-between ">
+
+        <div class="d-flex  align-items-center ">
+            <button class="mat-elevation-z1" mat-stroked-button color='warn' (click)="logOut()">Log out <i
+                    class="fas fa-sign-out-alt mx-1"></i></button>
+            <button class="mat-elevation-z1 mx-1" mat-raised-button>Profile<i class="fa fa-user mx-1"></i></button>
+
+        </div>
+        <div class="d-flex  align-items-center justify-content-between  ">
+
+            <button mat-icon-button (click)="[sidenav.toggle(),sidenav2.toggle()]">
+                <i class="fa fa-bars"></i>
+            </button>
+            <app-logo [scale]="'scale(.6,.6)'" class="d-none d-sm-block d-md-block"></app-logo>
+        </div>
+    </div>
+    <div class=" progressbar">
+        <mat-progress-bar *ngIf="isLoading | async " mode="indeterminate" color="primary"></mat-progress-bar>
+
+    </div>
+</mat-toolbar>
+
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav2 mode='side' position="end" opened class="example-sidenav2 " [fixedInViewport]="true" [fixedTopGap]="0" disableClose='true'>
+
+        <div class="container-fluid">
+            <div class="row my-5">
+                <div class="col-12 d-flex justify-content-center">
+                    <app-logo [logoOnly]="true" [scale]="'scale(.5,.5)'" class="d-block d-sm-none "></app-logo>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="container-fluid ">
+            <div class=" row text-center px-0">
+
+                <div class="col-12 py-2 my-1" *ngFor="let item of sideNavData" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink={{item.path}}>
+                    <i class="{{item.icon}}"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+
+
+        <mat-sidenav-container>
+            <mat-sidenav #sidenav [mode]='mode' position="end" closed class="sideNav" [fixedInViewport]="true" [fixedTopGap]="55" [disableClose]='true'>
+
+
+                <div class="container-fluid ">
+                    <div class="navs row text-right px-0 ">
+
+                        <app-logo [scale]="'scale(.6,.6)'" class="d-block d-sm-none "></app-logo>
+
+                        <mat-accordion dir="rtl">
+                            <ng-container *ngFor="let item of sideNavData ">
+                                <ng-container *ngIf="item.multi;else elseTemplate1 ">
+                                    <mat-expansion-panel style="background-color: transparent ;color:#fff; ">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <span>
+                                                    <a> <i [class]=item.icon></i>
+                                                        {{item.label}} </a>
+                                                </span>
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <div *ngIf="item.subs.length !=0 ">
+                                            <div class="col-12 my-0 px-3 py-3 " routerLinkActive="active " [routerLinkActiveOptions]="{exact: true} " *ngFor="let sub of item.subs ">
+                                                <a class="d-flex justify-content-between " routerLink={{sub.path}}>
+                                                    <span>{{sub.label}}</span> <i [class]=sub.icon></i></a>
+                                            </div>
+                                            <mat-divider></mat-divider>
+
+                                        </div>
+                                    </mat-expansion-panel>
+                                </ng-container>
+
+                                <ng-template #elseTemplate1>
+                                    <div style="text-align: right; padding: .5rem 1.5rem; " routerLinkActive="active " [routerLinkActiveOptions]="{exact: true} "> <span><a routerLink={{item.path}}><i
+                                                    [class]=item.icon></i>
+                                                {{item.label}} </a></span>
+                                    </div>
+                                </ng-template>
+                            </ng-container>
+                        </mat-accordion>
+                    </div>
+                </div>
+
+
+            </mat-sidenav>
+
+            <mat-sidenav-content>
+
+                <!-- routing content -->
+
+                <ng-content select=".main"></ng-content>
+
+
+
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>

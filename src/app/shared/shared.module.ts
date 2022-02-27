@@ -28,7 +28,10 @@ import { LogoComponent } from './compontents/logo/logo.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BreadCrumbComponent } from './compontents/bread-crumb/bread-crumb.component';
 import { RouterModule } from '@angular/router';
- 
+import { SideBarComponent } from './compontents/side-bar/side-bar.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+
 
 @NgModule({
   declarations: [
@@ -38,13 +41,21 @@ import { RouterModule } from '@angular/router';
     DeleteComponent,
     ActivateComponent,
     LogoComponent,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    SideBarComponent
   ],
   imports: [
     MatInputModule,
     CommonModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    MatSidenavModule,
+    MatExpansionModule,
+    MatDividerModule,
+    RouterModule,
+    MatToolbarModule,
+    CdkAccordionModule,
+    MatProgressBarModule
   ],
   exports: [
     CommonModule,
@@ -73,8 +84,8 @@ import { RouterModule } from '@angular/router';
     MatTableModule,
     LogoComponent,
     BreadCrumbComponent,
-    MatCheckboxModule
-
+    MatCheckboxModule,
+    SideBarComponent
   ]
 
 })
